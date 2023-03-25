@@ -6,20 +6,22 @@
 #https://leetcode.com/problems/middle-of-the-linked-list/
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        current = head
-        count = 0
-        list_ans = []
-        j = 0
         
-        while current:
-            count+=1
-            current = current.next
-        
-        current = head
-        count_ans = count // 2 + 1
-        while current:
-            j+=1
-            if (j == count_ans):
-                break
-            current = current.next
-        return current
+        current_slow = head
+        current_fast = head
+
+        if head == None or head.next == None:
+            return head
+
+        while current_fast and current_fast.next:
+            
+            if current_slow.next:
+                current_slow = current_slow.next
+            
+            if current_fast.next:
+                current_fast = current_fast.next
+            
+            if current_fast.next:
+                current_fast = current_fast.next
+
+        return current_slow
