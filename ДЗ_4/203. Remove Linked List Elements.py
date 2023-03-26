@@ -12,16 +12,14 @@ class Solution:
         if head == None:
             return head
         
-        while current and current.val == val:
-            head = current.next
-            current = head
+        while head and head.val == val:
+            head = head.next
         
-        if current:
-            while current.next:
-                
-                if current.next.val == val:
-                    current.next = current.next.next
-                else:
-                    current = current.next
+        while current.next:
+            
+            if current.next.val == val:
+                current.next = current.next.next
+            else:
+                current = current.next
         
         return head
