@@ -7,40 +7,43 @@
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
 
-        current_A = headA
-        current_B = headB
-        l_A = 0
-        l_B = 0
-        count = 0
+        current_1 = headA
+        current_2 = headB
+        flag = True
 
-        while current_A:
-            l_A += 1
-            current_A = current_A.next
-        
-        while current_B:
-            l_B += 1
-            current_B = current_B.next
-        
-        current_A = headA
-        current_B = headB
-        
-        if l_A < l_B:
-            count = l_B - l_A
-            while count > 0:
-                current_B = current_B.next
-                count -= 1
-        
-        elif l_A > l_B:
-            count = l_A - l_B
-            while count > 0:
-                current_A = current_A.next
-                count -= 1
+        if headA == None or headB == None:
+            return None
 
-        while current_A:
-            if current_A == current_B:
-                return current_A
+        while current_1 and current_2:
+
+            current_1 = current_1.next
+            current_2 = current_2.next
+
+            if current_1 == None and flag:
+                flag = False
+                current_1 = headA
+
+                while current_2:
+                    headB = headB.next
+                    current_2 = current_2.next
             
-            current_A = current_A.next
-            current_B = current_B.next
+            if current_2 == None and flag:
+                flag = False
+                current_2 = headB
+                
+                while current_1:
+                    headA = headA.next
+                    current_1 = current_1.next
+        
+        current_1 = headA
+        current_2 = headB
+
+        while current_1 and current_2:
+
+            if current_1 == current_2:
+                return current_1
+            
+            current_1 = current_1.next
+            current_2 = current_2.next
         
         return None
